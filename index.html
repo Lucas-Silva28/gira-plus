@@ -11,7 +11,11 @@
 -->
 
     <style>
-/* GIRA+ 5.1.0 — CSS incorporado para execução em arquivo único */
+/* GIRA+ 5.1.1 — CSS incorporado para execução em arquivo único */
+/* 5.1.1: corrigido o botão X da Apresentação, que ficava clicável de forma
+   invisível mesmo com o modal fechado, bloqueando o toque no botão de tema
+   claro/escuro. Agora só é interativo quando a Apresentação está de fato
+   aberta. Consolidadas regras CSS e listeners duplicados desse botão. */
 :root {
         --bg-color: #121824;
         --card-bg: #1e2638;
@@ -2017,18 +2021,17 @@
         position: absolute;
         right: 14px;
         top: 14px;
-      }
-
-      /* O X pertence exclusivamente ao modo Apresentação.
-         Ele não participa do cabeçalho nem do botão de tema. */
-      #presentation-modal .presentation-close {
-        position: absolute !important;
-        top: 14px !important;
-        right: 14px !important;
-        z-index: 100 !important;
-        pointer-events: auto !important;
         min-width: 48px;
         min-height: 48px;
+      }
+
+      /* O X pertence exclusivamente ao modo Apresentação. Só é clicável quando
+         o modal está de fato ativo — sem essa condição, o botão ficava "fantasma"
+         (invisível, porém clicável) sobre o botão de tema mesmo com a apresentação
+         fechada, bloqueando o toque nele. */
+      #presentation-modal.active .presentation-close {
+        z-index: 100;
+        pointer-events: auto;
       }
 
       .presentation-meta {
@@ -2453,16 +2456,8 @@
         touch-action: manipulation;
         z-index: 2;
       }
-      .presentation-close {
-        z-index: 50 !important;
-        pointer-events: auto !important;
-        touch-action: manipulation;
-        min-width: 48px;
-        min-height: 48px;
-        cursor: pointer;
-      }
-      #presentation-modal {
-        z-index: 4000 !important;
+      #presentation-modal.active {
+        z-index: 4000;
       }
       #presentation-modal .presentation-spin {
         z-index: 10;
@@ -4299,6 +4294,7 @@
       <div class="presentation-shell">
         <button
           class="presentation-close btn-icon"
+          id="presentation-close-btn"
           type="button"
           aria-label="Fechar apresentação"
           title="Fechar apresentação"
@@ -4519,10 +4515,10 @@
     </div>
 
     <!-- Rodapé Limpo -->
-    <footer>Gira+ ver 5.1.0 — Roleta Personalizada</footer>
+    <footer>Gira+ ver 5.1.1 — Roleta Personalizada</footer>
 
     <script>
-/* GIRA+ 5.1.0 — JavaScript incorporado para execução em arquivo único */
+/* GIRA+ 5.1.1 — JavaScript incorporado para execução em arquivo único */
 /* ===== 01-core-media.js ===== */
 const COLOR_PALETTE = [
         "#6366f1",
@@ -7955,25 +7951,13 @@ const COLOR_PALETTE = [
           e.stopPropagation();
           spinPresentation();
         });
-        // Captura o X antes dos elementos internos, inclusive em toque no celular.
-        document.addEventListener("pointerdown", (e) => {
-          if (!presentationOpen) return;
-          const closeBtn = e.target?.closest?.("#presentation-modal .presentation-close");
-          if (closeBtn) {
-            e.preventDefault();
-            e.stopPropagation();
-            closePresentation();
-          }
-        }, { capture: true, passive: false });
-        document.addEventListener("click", (e) => {
-          if (!presentationOpen) return;
-          const closeBtn = e.target?.closest?.("#presentation-modal .presentation-close");
-          if (closeBtn) {
-            e.preventDefault();
-            e.stopPropagation();
-            closePresentation();
-          }
-        }, { capture: true });
+        // Fecha ao tocar/clicar no X — mesmo padrão simples usado pelos
+        // outros botões de fechar do sistema (account-close, trash-close, share-close).
+        $("presentation-close-btn")?.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closePresentation();
+        });
         $("presentation-modal")?.addEventListener("pointerdown", (e) => {
           if (e.target.id === "presentation-modal") closePresentation();
         });
@@ -8181,7 +8165,7 @@ const COLOR_PALETTE = [
 
         // 7) Performance/qualidade: diagnóstico local não invasivo.
         window.GiraDiagnostics = {
-          version: "5.1.0",
+          version: "5.1.1",
           storage: "localStorage + IndexedDB",
           backend: false,
           serviceWorker: false,
