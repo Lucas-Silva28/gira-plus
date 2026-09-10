@@ -89,7 +89,7 @@ O projeto inclui:
 
 ### Tela principal
 
-![Tela principal](screenshots/tela-1.jpg)
+![Tela principal](assets/tela-1.jpg)
 
 ### Personalização visual e efeitos
 
