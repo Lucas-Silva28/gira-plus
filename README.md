@@ -1,7 +1,7 @@
 # 🎡 Gira+
 
 <p align="center">
-  <img src="assets/icon-512.jpg" alt="Gira+" width="180">
+  <img src="assets/icon-512.png" alt="Gira+" width="180">
 </p>
 
 <p align="center"><strong>Uma roleta personalizada para transformar sorteios e dinâmicas em experiências mais visuais, rápidas e interativas.</strong></p>
