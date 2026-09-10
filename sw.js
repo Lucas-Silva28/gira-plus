@@ -1,4 +1,4 @@
-const CACHE_NAME = "gira-plus-v5.2.0";
+const CACHE_NAME = "gira-plus-v5.3.0";
 const APP_SHELL = ["./", "./index.html", "./manifest.json", "./assets/icon-192.png", "./assets/icon-512.png"];
 
 self.addEventListener("install", (event) => {

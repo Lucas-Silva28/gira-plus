@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Gira%2B-v5.2.0-6366f1?style=for-the-badge" alt="Versão 5.2.0">
+  <img src="https://img.shields.io/badge/Gira%2B-v5.3.0-6366f1?style=for-the-badge" alt="Versão 5.3.0">
   <img src="https://img.shields.io/badge/PWA-ready-10b981?style=for-the-badge" alt="PWA">
   <img src="https://img.shields.io/badge/HTML5-CSS3-JavaScript-f59e0b?style=for-the-badge" alt="Tecnologias">
   <img src="https://img.shields.io/badge/license-Apache--2.0-94a3b8?style=for-the-badge" alt="Licença Apache 2.0">
@@ -69,6 +69,9 @@ O Gira+ possui uma área dedicada à personalização da roleta e dos resultados
 A seleção de efeitos é intencional: o usuário escolhe o comportamento visual que deseja utilizar, em vez de receber um efeito aleatório.
 
 ## 📱 PWA
+
+A partir da versão **5.3.0**, o Gira+ inclui um convite de instalação próprio dentro da interface. Quando o navegador disponibiliza a instalação, o botão **Instalar Gira+** aciona o fluxo oficial; em navegadores que não oferecem o prompt, o painel orienta a instalação manual. O convite não é exibido enquanto o sistema já estiver instalado e o usuário pode adiá-lo.
+
 
 O projeto inclui:
 
@@ -150,7 +153,7 @@ O desenvolvimento do Gira+ prioriza evolução incremental, preservação de fun
 
 ## 📌 Status
 
-**Versão atual: 5.2.0**
+**Versão atual: 5.3.0**
 
 Projeto em evolução contínua pela **Koda Sistemas**.
 
