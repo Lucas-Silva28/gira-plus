@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gira+ — Roleta Personalizada</title>
+    <meta name="theme-color" content="#121824" />
+    <meta name="description" content="Gira+ — Roleta personalizada para sorteios, dinâmicas, apresentações, aulas e atividades em grupo." />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
+    <link rel="apple-touch-icon" href="./assets/icon-180.png" />
 <!--
   GIRA+ — Nota para manutenção:
   Este sistema é uma ferramenta de seleção/sorteio para atividades, apresentações e brincadeiras.
@@ -11,7 +16,7 @@
 -->
 
     <style>
-/* GIRA+ 5.1.1 — CSS incorporado para execução em arquivo único */
+/* GIRA+ 5.2.0 — CSS incorporado para execução em arquivo único */
 /* 5.1.1: corrigido o botão X da Apresentação, que ficava clicável de forma
    invisível mesmo com o modal fechado, bloqueando o toque no botão de tema
    claro/escuro. Agora só é interativo quando a Apresentação está de fato
@@ -4515,10 +4520,16 @@
     </div>
 
     <!-- Rodapé Limpo -->
-    <footer>Gira+ ver 5.1.1 — Roleta Personalizada</footer>
+    <footer>Gira+ ver 5.2.0 — Roleta Personalizada</footer>
 
     <script>
-/* GIRA+ 5.1.1 — JavaScript incorporado para execução em arquivo único */
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js").catch(() => {});
+        });
+      }
+
+/* GIRA+ 5.2.0 — JavaScript incorporado para execução em arquivo único */
 /* ===== 01-core-media.js ===== */
 const COLOR_PALETTE = [
         "#6366f1",
@@ -8165,7 +8176,7 @@ const COLOR_PALETTE = [
 
         // 7) Performance/qualidade: diagnóstico local não invasivo.
         window.GiraDiagnostics = {
-          version: "5.1.1",
+          version: "5.2.0",
           storage: "localStorage + IndexedDB",
           backend: false,
           serviceWorker: false,
